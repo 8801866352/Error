@@ -1,6 +1,4 @@
-</Target>
-
-  <Target Name="CustomClean" BeforeTargets="Clean">
+  <Target Name="CustomAfterBuild" AfterTargets="Build">
 
 <PropertyGroup>
 
@@ -8,10 +6,14 @@
 
   </PropertyGroup>
 
-    <Message Text="Inside Custom Clean" Importance="high"/>
-
     <ItemGroup>
 
-      <_CustomFilesToDelete Include="$(_OutputCopyLocation)**\*"/>
+      <_FilesToCopy Include="$(OutputPath)**\*"/>
 
     </ItemGroup>
+
+    <Message Text="_FilesToCopy: @(_FilesToCopy)" Importance="high"/>
+
+    <Message Text="DestFiles:
+
+        @(_FilesToCopy->'$(_OutputCopyLocation)%(RecursiveDir)%(Filename)%(Extension)')"/>
